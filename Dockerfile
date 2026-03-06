@@ -51,6 +51,11 @@ RUN apt-get update \
  nano \
  && rm -rf /var/lib/apt/lists/*
 
+# Install Amp CLI
+RUN curl -fsSL https://ampcode.com/install.sh | bash
+
+# Install Factory Droid CLI
+RUN curl -fsSL https://app.factory.ai/cli | sh
 
 # `openclaw update` expects pnpm. Provide it in the runtime image.
 RUN corepack enable && corepack prepare pnpm@10.23.0 --activate
