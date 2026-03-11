@@ -44,14 +44,21 @@ FROM node:22-bookworm
 ENV NODE_ENV=production
 RUN apt-get update \
  && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
- ca-certificates \
- tini \
- python3 \
- python3-venv \
- nano \
+    ca-certificates \
+    tini \
+    python3 \
+    python3-venv \
+    nano \
+    libnspr4 \
+    libnss3 \
+    libatk-bridge2.0-0 \
+    libgtk-3-0 \
+    libgbm1 \
+    libasound2 \
  && rm -rf /var/lib/apt/lists/*
 
-
+RUN mkdir -p /root/.cache /data/.ms-playwright && \
+    ln -sfn /data/.ms-playwright /root/.cache/ms-playwright
 
 # Install Factory Droid CLI
 RUN curl -fsSL https://app.factory.ai/cli | sh
